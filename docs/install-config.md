@@ -6,14 +6,14 @@ forking Hermes.
 ## Local Install
 
 ```sh
-cd /Users/jonathanhaas/hermes-evalops-plugin
+cd hermes-evalops-plugin
 python3 -m pip install -e .
 ```
 
 For a plugin-directory demo, point Hermes at:
 
 ```text
-/Users/jonathanhaas/hermes-evalops-plugin/plugins/evalops
+<repo-root>/plugins/evalops
 ```
 
 The plugin entrypoint also injects this repo's `src/` path, so editable install

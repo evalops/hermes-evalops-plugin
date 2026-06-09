@@ -60,7 +60,6 @@ class PluginState:
             "runtime": {
                 "source": "hermes-evalops-plugin",
                 "pid": os.getpid(),
-                "cwd": os.getcwd(),
             },
         }
         try:
