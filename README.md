@@ -22,11 +22,11 @@ swap to the scoped `agent-mcp` registration path when EVA-157 is merged.
 ## Quick Demo
 
 ```sh
-cd /Users/jonathanhaas/hermes-evalops-plugin
+cd hermes-evalops-plugin
 PYTHONPATH=src python3 -m unittest discover -s tests
 python3 examples/demo_plugin_flow.py
 ```
 
 ## Install
 
-See [docs/install-config.md](/Users/jonathanhaas/hermes-evalops-plugin/docs/install-config.md).
+See [docs/install-config.md](docs/install-config.md).
