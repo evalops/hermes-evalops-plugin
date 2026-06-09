@@ -1,5 +1,7 @@
 # hermes-evalops-plugin
 
+[![CI](https://github.com/evalops/hermes-evalops-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/evalops/hermes-evalops-plugin/actions/workflows/ci.yml)
+
 A Hermes plugin that routes LLM calls through the EvalOps gateway and reports
 agent registration and tool spans back to the EvalOps platform. It loads as a
 standalone Hermes plugin and does not fork Hermes.
