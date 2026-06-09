@@ -58,3 +58,7 @@ plugin can run against stubs today and swap to the scoped `agent-mcp`
 registration path once EVA-157 lands. Override
 `HERMES_EVALOPS_REGISTRATION_ENDPOINT` and `HERMES_EVALOPS_SPAN_INGEST_ENDPOINT`
 to point at the final endpoints.
+
+## License
+
+[MIT](LICENSE) © EvalOps

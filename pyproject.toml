@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Spike Hermes plugin for EvalOps gateway provider, agent registration, and trace/span ingestion."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "Proprietary" }
+license = { text = "MIT" }
 authors = [{ name = "EvalOps" }]
 dependencies = []
 
