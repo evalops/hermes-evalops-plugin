@@ -37,10 +37,12 @@ class PluginState:
         trace = trace or TraceContext.new_root()
         payload = {
             "agent_id": self.config.agent_id,
+            "agent_type": self.config.agent_type,
             "name": self.config.agent_name,
             "version": self.config.agent_version,
             "kind": "hermes-external-agent",
-            "provider": self.provider.name,
+            "provider": self.config.auth_provider,
+            "gateway_provider": self.provider.name,
             "organization_id": self.config.organization_id,
             "workspace_id": self.config.workspace_id,
             "surfaces": ["slack", "telegram", "terminal", "cron"],
