@@ -44,6 +44,8 @@ class EvalOpsPlatformClient:
                 "capabilities": payload.get("capabilities") or [],
                 "ttl_seconds": 3600,
             }
+            if self.config.platform_token:
+                arguments["user_token"] = self.config.platform_token
             return self.call_mcp_tool("evalops_register", arguments, trace)
         return self._post_json(
             urljoin(self.config.platform_url.rstrip("/") + "/", self.config.registration_endpoint.lstrip("/")),
@@ -211,8 +213,6 @@ class EvalOpsPlatformClient:
         }
         if session_id:
             headers["mcp-session-id"] = session_id
-        if self.config.platform_token:
-            headers["authorization"] = f"Bearer {self.config.platform_token}"
         inject_trace_headers(headers, trace)
         req = request.Request(endpoint, data=body, headers=headers, method="POST")
         try:
