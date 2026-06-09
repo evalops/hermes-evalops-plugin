@@ -14,12 +14,10 @@ from .trace_context import SessionTraceStore, TraceContext
 
 
 HOOKS = [
-    ("on_startup", "on_startup"),
-    ("agent:start", "agent_start"),
+    ("on_session_start", "on_session_start"),
     ("pre_llm_call", "pre_llm_call"),
     ("post_llm_call", "post_llm_call"),
     ("post_tool_call", "post_tool_call"),
-    ("agent:end", "agent_end"),
     ("on_session_end", "on_session_end"),
 ]
 
@@ -125,12 +123,7 @@ def register(ctx: Any) -> None:
         _state.register_agent_once()
 
 
-def on_startup(**kwargs: Any) -> dict[str, Any]:
-    trace = _state.ensure_session_trace(kwargs.get("session_id") or "startup", kwargs)
-    return _state.register_agent_once(trace)
-
-
-def agent_start(**kwargs: Any) -> dict[str, Any]:
+def on_session_start(**kwargs: Any) -> dict[str, Any]:
     trace = _state.ensure_session_trace(_session_key(kwargs), kwargs)
     registration = _state.register_agent_once(trace)
     return {"trace_id": trace.trace_id, "traceparent": trace.traceparent, "registration": registration}
@@ -151,10 +144,6 @@ def post_llm_call(**kwargs: Any) -> dict[str, Any]:
 
 def post_tool_call(**kwargs: Any) -> dict[str, Any]:
     return _state.ingest_tool_span(kwargs)
-
-
-def agent_end(**kwargs: Any) -> dict[str, Any]:
-    return on_session_end(**kwargs)
 
 
 def on_session_end(**kwargs: Any) -> dict[str, Any]:

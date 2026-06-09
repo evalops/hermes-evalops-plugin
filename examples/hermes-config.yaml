@@ -3,11 +3,12 @@
 # Once EVA-157 is deployed, this routes Hermes LLM calls through the EvalOps
 # OpenAI-compatible gateway while the plugin contributes session/tool spans.
 custom_providers:
-  evalops-gateway:
+  - name: evalops-gateway
     base_url: https://llm-gateway.evalops.dev/v1
     api_key_env: EVALOPS_API_KEY
     api_mode: chat_completions
+    model: deepseek/deepseek-v4-pro
 
 model:
-  provider: evalops-gateway
-
+  provider: custom:evalops-gateway
+  default: deepseek/deepseek-v4-pro

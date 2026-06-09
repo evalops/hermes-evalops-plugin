@@ -50,7 +50,7 @@ def main() -> None:
     with mock.patch.object(hooks, "_state", hooks.PluginState(client=client)):
         ctx = DemoContext()
         hooks.register(ctx)
-        ctx.hooks["agent:start"](session_id="demo-session", surface="terminal")
+        ctx.hooks["on_session_start"](session_id="demo-session", surface="terminal")
         llm_trace = ctx.hooks["pre_llm_call"](session_id="demo-session", metadata={})
         ctx.hooks["post_tool_call"](
             session_id="demo-session",

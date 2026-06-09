@@ -11,8 +11,8 @@ plus a Hermes-style plugin directory:
 - `src/hermes_evalops_plugin/gateway_provider.py` implements an OpenAI-shaped,
   EvalOps gateway-backed LLM provider.
 - `src/hermes_evalops_plugin/hooks.py` registers the provider, registers the
-  external agent on startup/`agent:start`, ingests `post_tool_call` spans, and
-  propagates session trace IDs.
+  external agent on `on_session_start`, ingests `post_tool_call` spans,
+  and propagates session trace IDs.
 - `examples/hermes-config.yaml` shows the Hermes `custom_providers` fragment for
   `evalops-gateway`.
 

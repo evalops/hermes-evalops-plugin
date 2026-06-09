@@ -25,13 +25,15 @@ Add the EvalOps gateway as a custom provider:
 
 ```yaml
 custom_providers:
-  evalops-gateway:
+  - name: evalops-gateway
     base_url: https://llm-gateway.evalops.dev/v1
     api_key_env: EVALOPS_API_KEY
     api_mode: chat_completions
+    model: deepseek/deepseek-v4-pro
 
 model:
-  provider: evalops-gateway
+  provider: custom:evalops-gateway
+  default: deepseek/deepseek-v4-pro
 ```
 
 Then run Hermes with provider `evalops-gateway`. LLM spans are expected to be
@@ -80,8 +82,8 @@ ingest endpoints, or replace `EvalOpsPlatformClient` with generated clients.
 
 ## Runtime Behavior
 
-At startup or `agent:start`, the plugin registers an external Hermes agent with
-EvalOps using:
+On Hermes Python hook `on_session_start`, the plugin registers an external
+Hermes agent with EvalOps using:
 
 - agent ID/name/version
 - organization/workspace

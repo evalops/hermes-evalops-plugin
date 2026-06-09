@@ -43,16 +43,15 @@ class HooksTest(unittest.TestCase):
             hooks.register(ctx)
 
         self.assertIn("evalops-gateway", ctx.providers)
-        self.assertIn("on_startup", ctx.hooks)
-        self.assertIn("agent:start", ctx.hooks)
-        self.assertIn("agent:end", ctx.hooks)
+        self.assertIn("on_session_start", ctx.hooks)
+        self.assertIn("on_session_end", ctx.hooks)
         self.assertIn("post_tool_call", ctx.hooks)
 
-    def test_startup_registers_agent_once(self) -> None:
+    def test_session_start_registers_agent_once(self) -> None:
         client = RecordingClient()
         with mock.patch.object(hooks, "_state", hooks.PluginState(client=client)):
-            hooks.on_startup(session_id="session-1")
-            hooks.on_startup(session_id="session-1")
+            hooks.on_session_start(session_id="session-1")
+            hooks.on_session_start(session_id="session-1")
 
         self.assertEqual(len(client.registrations), 1)
         payload, trace = client.registrations[0]
