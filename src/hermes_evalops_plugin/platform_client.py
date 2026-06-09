@@ -40,7 +40,6 @@ class EvalOpsPlatformClient:
                 "provider": payload.get("provider") or self.config.auth_provider,
                 "surface": "hermes-gateway",
                 "workspace_id": self.config.workspace_id or self.config.organization_id,
-                "agent_id": payload.get("agent_id") or self.config.agent_id,
                 "capabilities": payload.get("capabilities") or [],
                 "ttl_seconds": 3600,
             }
