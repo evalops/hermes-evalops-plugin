@@ -46,17 +46,18 @@ trace.
 Required for live gateway calls:
 
 ```sh
-export HERMES_EVALOPS_GATEWAY_URL="https://gateway.evalops.example/v1/chat/completions"
-export HERMES_EVALOPS_GATEWAY_TOKEN="..."
+export HERMES_EVALOPS_GATEWAY_URL="https://llm-gateway.evalops.dev/v1"
+export HERMES_EVALOPS_GATEWAY_TOKEN="..."  # Identity bootstrap key or issued agent token
 ```
 
-Required for live registration/span ingest:
+Required for live registration/span ingest (gated on EVA-157 — agent-mcp not
+yet publicly exposed):
 
 ```sh
-export HERMES_EVALOPS_PLATFORM_URL="https://platform.evalops.example"
-export HERMES_EVALOPS_PLATFORM_TOKEN="..."
-export HERMES_EVALOPS_ORGANIZATION_ID="org_..."
-export HERMES_EVALOPS_WORKSPACE_ID="ws_..."
+export HERMES_EVALOPS_PLATFORM_URL="https://api.evalops.dev"
+export HERMES_EVALOPS_PLATFORM_TOKEN="..."  # Same identity token
+export HERMES_EVALOPS_ORGANIZATION_ID="org_evalops"
+export HERMES_EVALOPS_WORKSPACE_ID="evalops"
 ```
 
 Useful knobs:
@@ -69,16 +70,22 @@ export HERMES_EVALOPS_CAPTURE_PAYLOADS="0"
 export HERMES_EVALOPS_TIMEOUT_SECONDS="10"
 ```
 
-EVA-157 swap points:
+EVA-157 swap points (current defaults use in-process MCP stubs):
 
 ```sh
-export HERMES_EVALOPS_REGISTRATION_ENDPOINT="/v1/agent-mcp/external-agents/register"
+# Current defaults — run against local stubs with no network or credentials:
+#   HERMES_EVALOPS_REGISTRATION_ENDPOINT=mcp
+#   HERMES_EVALOPS_SPAN_INGEST_ENDPOINT=mcp:self_diagnostic
+#
+# Once EVA-157 lands and agent-mcp is publicly exposed, swap to:
+export HERMES_EVALOPS_REGISTRATION_ENDPOINT="mcp"
 export HERMES_EVALOPS_SPAN_INGEST_ENDPOINT="/v1/agent-runtime/external-spans"
 ```
 
-Those defaults are intentionally contract-shaped placeholders. Once EVA-157
-lands, replace them with the final scoped `agent-mcp` registration and span
-ingest endpoints, or replace `EvalOpsPlatformClient` with generated clients.
+The `mcp` registration endpoint connects to the platform's agent-mcp
+StreamableHTTP endpoint. The `mcp:self_diagnostic` span ingest posts tool spans
+as self-diagnostic events through the same MCP session. Once EVA-157 ships,
+replace `mcp:self_diagnostic` with the scoped span ingest path.
 
 ## Runtime Behavior
 
