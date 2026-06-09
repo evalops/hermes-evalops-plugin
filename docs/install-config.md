@@ -47,15 +47,15 @@ Required for live gateway calls:
 
 ```sh
 export HERMES_EVALOPS_GATEWAY_URL="https://llm-gateway.evalops.dev/v1"
-export HERMES_EVALOPS_GATEWAY_TOKEN="..."  # Identity bootstrap key or issued agent token
+export HERMES_EVALOPS_GATEWAY_TOKEN="***"  # Identity bootstrap key or issued agent token
 ```
 
-Required for live registration/span ingest (gated on EVA-157 — agent-mcp not
-yet publicly exposed):
+Required for live registration/span ingest (agent-mcp is live at
+`https://app.evalops.dev/mcp`, auth required):
 
 ```sh
-export HERMES_EVALOPS_PLATFORM_URL="https://api.evalops.dev"
-export HERMES_EVALOPS_PLATFORM_TOKEN="..."  # Same identity token
+export HERMES_EVALOPS_PLATFORM_URL="https://app.evalops.dev"
+export HERMES_EVALOPS_PLATFORM_TOKEN="***"  # Same identity token
 export HERMES_EVALOPS_ORGANIZATION_ID="org_evalops"
 export HERMES_EVALOPS_WORKSPACE_ID="evalops"
 ```
