@@ -41,6 +41,7 @@ class EvalOpsPlatformClient:
                 "surface": "hermes-gateway",
                 "workspace_id": self.config.workspace_id or self.config.organization_id,
                 "capabilities": payload.get("capabilities") or [],
+                "scopes": ["traces:write"],
                 "ttl_seconds": 3600,
             }
             if self.config.platform_token:
